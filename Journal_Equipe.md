@@ -1,3 +1,5 @@
 # Journal du projet
-
-*Ce fichier est destiné à recevoir un récapitulatif de ce que vous avez fait pendant la journée avec votre équipe. Vous êtes libres d'organiser le bilan de vos journées comme bon vous semble (ex : fait aujourd'hui - plans pour demain - blocages)*
+10/01/2022
+ - Idée du projet trouvée : ce sera une extension pour corriger la grammaire / orthographe / proposer des synonymes ... en français
+ - APIs trouvées : on a 3 APIs qui proposent toutes des fonctionnalités intéressantes pour le projet 
+ - On a pris la décision de développer l'extension avec REACT --> atelier mis en place pour se familiariser un peu avec la technologie 
