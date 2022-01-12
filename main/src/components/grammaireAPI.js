@@ -1,4 +1,4 @@
-import React from "react";
+/* import React from "react";
 import axios from "axios";
 
 export default class GrammarChecker extends React.Component {
@@ -60,4 +60,4 @@ https://api.textgears.com/grammar
             }
         ]
     }
-} */
+} */ 
