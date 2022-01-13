@@ -7,3 +7,7 @@
 11/01/2022
  - On a réussi à faire un manifest qui fonctionne sur Chrome Extension 
  - On essaye de call des APIs sur REACT mais pour le moment impossible d'y arriver
+
+12/01/2022
+ - On a trouvé l'API qui fonctionne
+ - On va essayer Axios pour l'appeler, il reste à l'adapter à notre projet 
