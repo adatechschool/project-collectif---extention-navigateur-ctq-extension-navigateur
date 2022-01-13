@@ -24,7 +24,7 @@ export default class GrammarChecker extends React.Component {
  
 
   axiosAPI() {
-    // console.log("url",`https://api.textgears.com/grammar?key=yVEtZ7HVBesL9p1N&text={input}&language=fr-FR` )
+    // console.log("url",`https://api.textgears.com/grammar?key=yVEtZ7HVBesL9p1N&text={$userInput}&language=fr-FR` )
     axios
       .get(
         `https://api.textgears.com/grammar?text=Des+pomme+rouge&language=fr-FR&whitelist=&dictionary_id=&key=yVEtZ7HVBesL9p1N`
