@@ -1,82 +1,63 @@
-/* import React from "react";
+import React from "react";
 import axios from "axios";
 import { onSubmit } from "react";
 
 export default class GrammarChecker extends React.Component {
-  handleClick() {
-    let input = document.getElementById("userInput").value;
-    alert(input);
-  }
-
   state = {
     results: [],
   };
+  handleClick() {
+    let input = document.getElementById("userInput").value;
+    alert(input);
+    console.log("hello");
+  // axios.get(`https://api.textgears.com/grammar?key=yVEtZ7HVBesL9p1N&text={$input}&language=fr-FR`)
+  this.axiosAPI()
+  }
 
-  componentDidMount() {
+// axios.get(`https://api.textgears.com/grammar?text=Des+pomme+rouge&language=fr-FR&whitelist=&dictionary_id=&key=yVEtZ7HVBesL9p1N`)
+//     .then((res) => {
+//       alert("res data", res.data);
+//       const results = res.data;
+//       this.setState({results});
+      
+//     })
+ 
+
+  axiosAPI() {
+    // console.log("url",`https://api.textgears.com/grammar?key=yVEtZ7HVBesL9p1N&text={input}&language=fr-FR` )
     axios
       .get(
-        `https://api.textgears.com/grammar?key=yVEtZ7HVBesL9p1N&text={userInput}&language=fr-FR`
+        `https://api.textgears.com/grammar?text=Des+pomme+rouge&language=fr-FR&whitelist=&dictionary_id=&key=yVEtZ7HVBesL9p1N`
       )
       .then((res) => {
+        alert("res data", res.data);
         const results = res.data;
         this.setState({ results });
+        console.log("test", results)
       });
   }
 
   render() {
+    console.log(this.state)
     return (
       <>
         <h1>Correcteur de Grammaire</h1>
-        <form id="form" onSubmit="return false;">
-          <input type="text" id="userInput" />
-          <input type="submit" onClick={() => this.handleClick()} />
-        </form>
+        <div id="form">
+          <label for="userInput">Ecrivez ce que vous voulez :</label>
 
-        {/*<button onClick={}>Corrigez moi</button> */}
+          <textarea
+            id="userInput"
+            name="userInput"
+            rows="5"
+            cols="33"
+          ></textarea>
 
-        {/*  <div className="grammar-check">
-          {this.state.results.map((result) => (
-            <p>Faute potentielle : {result.error.bad}</p>
-          ))}
-          ;
-          {this.state.results.map((result) => (
-            <p>Meilleure option : {result.error.better}</p>
-          ))}
-          ;
-          {this.state.results.map((result) => (
-            <p>Explication : {result.error.description}</p>
-          ))}
-          ; */}
-        {/* </div> */}
-      </>
+          <input type="submit" value="Corrigez-moi" onClick={() => this.handleClick()} />
+        </div>
+
+        </>
     );
-  }
-}
+   }
+ }
 
-/* https://api.textgears.com/grammar?key=DEMO_KEY&text=I+is+an+engeneer!&language=en-GB
-https://api.textgears.com/grammar
- */
 
-/* résultat
-{
-    status : true,  // false in case of checking error
-    response : {
-        result : true,
-        errors : [  // array of errors info
-            0 : {
-                id : "e2138204610",  // unique error id
-                offset : 0,  // error text offset
-                length : 9,
-                description : {  // API error description & some useful info
-                    en : "‘Des’ et le nom ‘pomme’ ne semblent pas bien accordés."
-                },
-                bad : "Des pomme",  // error text
-                better : [  // array of suggestions
-                    0 : "De la pomme",
-                    1 : "Des pommes"
-                ],
-                type : "uncategorized"
-            }
-        ]
-    }
-} */
