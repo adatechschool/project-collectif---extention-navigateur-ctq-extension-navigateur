@@ -1,38 +1,57 @@
 import React from "react";
 import axios from "axios";
+import { onSubmit } from "react";
 
 export default class GrammarChecker extends React.Component {
+  handleClick() {
+    let input = document.getElementById("userInput").value;
+    alert(input);
+  }
+
   state = {
     results: [],
   };
 
   componentDidMount() {
-    axios.get(`https://api.textgears.com/grammar?key=yVEtZ7HVBesL9p1N&text={}&language=fr-FR`).then((res) => {
-      const results = res.data;
-      this.setState({ results });
-    });
+    axios
+      .get(
+        `https://api.textgears.com/grammar?key=yVEtZ7HVBesL9p1N&text={userInput}&language=fr-FR`
+      )
+      .then((res) => {
+        const results = res.data;
+        this.setState({ results });
+      });
   }
 
   render() {
     return (
-        <>
+      <>
+        <h1>Correcteur de Grammaire</h1>
+        <form id="form" onSubmit="return false;">
+          <input type="text" id="userInput" />
+          <input type="submit" onClick={() => this.handleClick()} />
+        </form>
 
-        <label for="text">Écrivez ce que vous voulez :</label>
-         <textarea id="text" name="text" rows="5" cols="33">
-        </textarea>
+        {/*<button onClick={}>Corrigez moi</button> */}
 
-        <button onClick={}>Submit</button>
-
-        <div className="grammar-check">
-            {this.state.results.map((result)=> (<p>Faute potentielle : {result.error.bad}</p>))};
-            {this.state.results.map((result)=> (<p>Meilleure option : {result.error.better}</p>))};
-            {this.state.results.map((result)=> (<p>Explication : {result.error.description}</p>))};
-        </div>
+        {/*  <div className="grammar-check">
+          {this.state.results.map((result) => (
+            <p>Faute potentielle : {result.error.bad}</p>
+          ))}
+          ;
+          {this.state.results.map((result) => (
+            <p>Meilleure option : {result.error.better}</p>
+          ))}
+          ;
+          {this.state.results.map((result) => (
+            <p>Explication : {result.error.description}</p>
+          ))}
+          ; */}
+        {/* </div> */}
       </>
     );
   }
 }
-
 
 /* https://api.textgears.com/grammar?key=DEMO_KEY&text=I+is+an+engeneer!&language=en-GB
 https://api.textgears.com/grammar
