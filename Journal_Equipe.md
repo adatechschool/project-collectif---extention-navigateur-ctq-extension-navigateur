@@ -11,3 +11,8 @@
 12/01/2022
  - On a trouvé l'API qui fonctionne
  - On va essayer Axios pour l'appeler, il reste à l'adapter à notre projet 
+
+13/01/2022
+ - On pensait que l'API ne fonctionnait pas donc on a réorganisé notre code avec plusieurs components 
+ - Après des heures de recherche sur le code JS, c'est finalement le form du HTML qui faisait tout buguer 
+ - Tout fonctionnait depuis le début ! 
