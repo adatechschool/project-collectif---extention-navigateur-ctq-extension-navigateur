@@ -16,3 +16,8 @@
  - On pensait que l'API ne fonctionnait pas donc on a réorganisé notre code avec plusieurs components 
  - Après des heures de recherche sur le code JS, c'est finalement le form du HTML qui faisait tout buguer 
  - Tout fonctionnait depuis le début ! 
+
+17/01/2022
+ - On a réussi à stocker le userInput dans une variable et l'utiliser dans l'URL de l'API pour corriger le texte écrit par l'utilisateur
+ - On a essayé d'afficher les données renvoyées par l'API dans le HTML --> réussi avec une méthode JS (append) mais peut-être voir plutôt une méthode REACT
+ - Le résultat de la correction renvoyé par l'API s'affiche deux fois sur la page HTML --> à régler 
