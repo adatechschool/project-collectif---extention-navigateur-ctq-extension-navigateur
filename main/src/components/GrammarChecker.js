@@ -11,11 +11,19 @@ export default class GrammarChecker extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+
+
+
+
+
+
+  
   handleClick() {
     let input = document.getElementById("userInput").value;
     this.setState({
       results: input,
     });
+   
   }
 
   /*  async axiosAPI() {
@@ -46,36 +54,40 @@ export default class GrammarChecker extends React.Component {
       }); */
   /* } */
 
-  render() {
+   render(){
     let userText = this.state.results;
+    console.log(userText);
     const key = "ZqavH6FY8qd0Wjj5";
     const url = `https://api.textgears.com/grammar?text=${userText}&language=fr-FR&whitelist=&dictionary_id=&key=${key}`;
 
-    axios.get(
-      axios
-        .get(url)
-        .then((res) => {
-          let stocks = Array.from(res.data["Stock Quotes"]).map((stock) => [
+    axios.get(url).then((res) => {
+console.log(res)
+     
+   //  this.setState({res.data});
+
+           let correction = Array.from(res.errors).map((error => [
             {
-              symbol: stock["1. symbol"],
-              price: stock["2. price"],
-              volume: stock["3. volume"],
-              timestamp: stock["4. timestamp"],
-            },
-          ]);
+              bad: error.bad ,
+              good: error.good,
+              description: error.description
+             
+            } 
+          ]));
 
-          this.setState((state, props) => {
-            return [...this.state.stocks];
-          });
+         this.setState({correction})
+         console.log(correction);
         })
-        .catch((error) => console.log(error))
-    );
+   
+        //.catch((error) => console.log(error))
+    
+        //render(){
 
+        
     return (
       <>
         <h1>Correcteur de Grammaire</h1>
         <div id="form">
-          <label for="userInput">Ecrivez ce que vous voulez :</label>
+          <label hmlfor="userInput">Ecrivez ce que vous voulez :</label>
 
           <textarea
             id="userInput"
@@ -90,7 +102,10 @@ export default class GrammarChecker extends React.Component {
             onClick={() => this.handleClick()}
           />
         </div>
+       {/*  <div>
+          {this.state.corrections.map(correction => <p>{correction.bad}<br/>{correction.good}<br/>{correction.description} </p>)}
+        </div> */}
       </>
     );
-  }
+  };
 }
