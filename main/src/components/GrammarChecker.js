@@ -26,56 +26,36 @@ export default class GrammarChecker extends React.Component {
    
   }
 
-  /*  async axiosAPI() {
-    const res = await axios.get(
-      `https://api.textgears.com/grammar?text=${input}&language=fr-FR&whitelist=&dictionary_id=&key=yVEtZ7HVBesL9p1N`
-    );
-    console.log(res);
-    return await res.json();
-  } */
-  // console.log("url",`https://api.textgears.com/grammar?key=yVEtZ7HVBesL9p1N&text={$userInput}&language=fr-FR` )
-  /*    axios
-      .get(
-        `https://api.textgears.com/grammar?text=${this.handleClick()}&language=fr-FR&whitelist=&dictionary_id=&key=yVEtZ7HVBesL9p1N`
-      )
-      .then((res) => {
-        const results = res.data;
-        this.setState({ results });
-        console.log("test", results);
-
-        for (const result of results) {
-          return (
-            <h1>
-              'Erreur: %s. Suggestions: %s', result.bad, result.better.join(',
-              ')
-            </h1>
-          );
-        }
-      }); */
-  /* } */
 
    render(){
     let userText = this.state.results;
     console.log(userText);
-    const key = "ZqavH6FY8qd0Wjj5";
+    const key = "0T5GmwonZGCtuAUj";
     const url = `https://api.textgears.com/grammar?text=${userText}&language=fr-FR&whitelist=&dictionary_id=&key=${key}`;
 
     axios.get(url).then((res) => {
-console.log(res)
+      console.log(res)
+console.log(res.data.response);
      
    //  this.setState({res.data});
-
-           let correction = Array.from(res.errors).map((error => [
-            {
-              bad: error.bad ,
-              good: error.good,
-              description: error.description
+for(let error in res.data.response.errors){
+  console.log(res.data.response.errors[error])
+  let div = document.getElementById("resultat")
+  
+let p = document.createElement("p")
+div.append(res.data.response.errors[error].bad, p)
+}
+        //    let correction = Array.from(res.data.response.errors).map((error => [
+        //     {
+        //       bad: error.bad ,
+        //       good: error.good,
+        //       description: error.description
              
-            } 
-          ]));
+        //     } 
+        //   ]));
 
-         this.setState({correction})
-         console.log(correction);
+        // //  this.setState({correction})
+        //  console.log(correction);
         })
    
         //.catch((error) => console.log(error))
@@ -102,9 +82,13 @@ console.log(res)
             onClick={() => this.handleClick()}
           />
         </div>
-       {/*  <div>
-          {this.state.corrections.map(correction => <p>{correction.bad}<br/>{correction.good}<br/>{correction.description} </p>)}
-        </div> */}
+        <div id="resultat">
+          <p></p>
+        {/* {errors.map((error => (
+        <p>{error.bad}</p>
+      ))} */}
+          {/* <p id= ""> erreur: {correction.bad},correction potentielle: {correction.good},description : {correction.description}</p> */}
+        </div>
       </>
     );
   };
