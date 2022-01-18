@@ -1,12 +1,27 @@
-/* import React from "react";
-import GrammarChecker from "./GrammarChecker";
+import React, { useEffect } from "react";
 import axios from "axios";
+import GrammarChecker from "./GrammarChecker";
 
-let userInput = document.getElementByID("userInput").value;
+const Correction = () => {
+  let userText = GrammarChecker.handleClick();
+  console.log(userText);
+  const key = "0T5GmwonZGCtuAUj";
+  const url = `https://api.textgears.com/grammar?text=${userText}&language=fr-FR&whitelist=&dictionary_id=&key=${key}`;
+  console.log(url);
+  useEffect(() => {
+    axios.get(url).then((res) => {
+      console.log(res);
+      console.log(res.data.response);
 
-async function Correction() {
-  let results = await axios.get(
-    `https://api.textgears.com/grammar?q=${userInput}&language=fr-FR&whitelist=&dictionary_id=&key=yVEtZ7HVBesL9p1N`
-  );
-}
- */
+      for (let error in res.data.response.errors) {
+        console.log(res.data.response.errors[error]);
+        let div = document.getElementById("resultat");
+        let p = document.createElement("p");
+        div.append(res.data.response.errors[error].bad, p);
+      }
+    });
+  });
+
+  return <div>{Correction}</div>;
+};
+export default Correction;

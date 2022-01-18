@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
-import { onSubmit } from "react";
 
 export default class GrammarChecker extends React.Component {
   constructor() {
@@ -9,6 +8,7 @@ export default class GrammarChecker extends React.Component {
       results: [],
     };
     this.handleClick = this.handleClick.bind(this);
+    /*   const [effect, useEffect] = useEffect(); */
   }
 
   handleClick() {
@@ -18,29 +18,49 @@ export default class GrammarChecker extends React.Component {
     });
   }
 
-  handleResult() {
+  /*  async */
+  /*   handleResult() {
     let userText = this.state.results;
     console.log(userText);
     const key = "0T5GmwonZGCtuAUj";
     const url = `https://api.textgears.com/grammar?text=${userText}&language=fr-FR&whitelist=&dictionary_id=&key=${key}`;
-
-    axios.get(url).then((res) => {
-      console.log(res);
-      console.log(res.data.response);
-
-      //  this.setState({res.data});
-      for (let error in res.data.response.errors) {
-        console.log(res.data.response.errors[error]);
-        let div = document.getElementById("resultat");
-
-        let p = document.createElement("p");
-        div.append(res.data.response.errors[error].bad, p);
-      }
+    console.log(url);
+    useEffect(() => {
+      /* await */ /* axios.get(url).then((res) => {
+        console.log(res);
+        console.log(res.data.response);
+        //  this.setState({res.data});
+        for (let error in res.data.response.errors) {
+          console.log(res.data.response.errors[error]);
+          let div = document.getElementById("resultat");
+          let p = document.createElement("p");
+          div.append(res.data.response.errors[error].bad, p);
+        }
+      });
     });
-  }
+  }  */
 
   render() {
-    this.handleResult();
+    /*   const handleResult = () => {
+      let userText = this.state.results;
+      console.log(userText);
+      const key = "0T5GmwonZGCtuAUj";
+      const url = `https://api.textgears.com/grammar?text=${userText}&language=fr-FR&whitelist=&dictionary_id=&key=${key}`;
+      console.log(url);
+      useEffect(() => {
+        /* await */ /* axios.get(url).then((res) => {
+          console.log(res);
+          console.log(res.data.response);
+          //  this.setState({res.data});
+          for (let error in res.data.response.errors) {
+            console.log(res.data.response.errors[error]);
+            let div = document.getElementById("resultat");
+            let p = document.createElement("p");
+            div.append(res.data.response.errors[error].bad, p);
+          }
+        });
+      });
+    };  */
 
     return (
       <>
