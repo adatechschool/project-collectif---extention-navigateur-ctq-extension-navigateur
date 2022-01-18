@@ -1,28 +1,26 @@
-import React, { useEffect } from "react";
+import React from "react";
 import axios from "axios";
-/* import Correction from "./correction"; */
+import "./GrammarChecker.css";
 
 export default class GrammarChecker extends React.Component {
   constructor() {
     super();
     this.state = {
-      results: "",
+      userInput: "",
       correction: [],
     };
-    /* this.handleClick = this.handleClick.bind(this); */
-    /*   const [effect, useEffect] = useEffect(); */
+
   }
 
   handleChange = (e) => {
-    this.setState({ results: e.target.value });
+    this.setState({ userInput: e.target.value });
   };
 
   handleSubmit = () => {
-    let userText = this.state.results;
+    let userText = this.state.userInput;
     const key = "0T5GmwonZGCtuAUj";
     const url = `https://api.textgears.com/grammar?text=${userText}&language=fr-FR&whitelist=&dictionary_id=&key=${key}`;
     axios.get(url).then((res) => {
-      console.log(res.data.response);
       this.setState({ correction: res.data.response.errors });
     });
   };
@@ -31,19 +29,20 @@ export default class GrammarChecker extends React.Component {
     return (
       <>
         <h1>Correcteur de Grammaire</h1>
+        <div className = "conteneur">
         <div id="form">
-          <label hmlfor="userInput">Ecrivez ce que vous voulez :</label>
+          <label className= "ecrivez" hmlfor="userInput">Ecrivez ce que vous voulez :</label>
 
           <textarea
-            value={this.results}
+            value={this.userInput}
             id="userInput"
             name="userInput"
-            rows="5"
+            rows="8"
             cols="33"
             onChange={this.handleChange}
           ></textarea>
 
-          <input
+          <input className="button"
             type="submit"
             value="Corrigez-moi"
             onClick={this.handleSubmit}
@@ -53,12 +52,13 @@ export default class GrammarChecker extends React.Component {
           {this.state.correction.map((data, key) => {
             return (
               <ul key={key}>
-                <li>Mauvais : {data.bad}</li>
-                <li>Correction Potentielle : {data.better[0]}</li>
-                <li>Description : {data.description.en}</li>
+                <li className="mauvais">Mauvais : {data.bad}</li>
+                <li className="mieux">Correction Potentielle : {data.better[0]}</li>
+                <li className="description">Description : {data.description.en}</li>
               </ul>
             );
           })}
+          </div>
         </div>
       </>
     );
