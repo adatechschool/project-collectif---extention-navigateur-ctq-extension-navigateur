@@ -11,58 +11,37 @@ export default class GrammarChecker extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-
-
-
-
-
-
-  
   handleClick() {
     let input = document.getElementById("userInput").value;
     this.setState({
       results: input,
     });
-   
   }
 
-
-   render(){
+  handleResult() {
     let userText = this.state.results;
     console.log(userText);
     const key = "0T5GmwonZGCtuAUj";
     const url = `https://api.textgears.com/grammar?text=${userText}&language=fr-FR&whitelist=&dictionary_id=&key=${key}`;
 
     axios.get(url).then((res) => {
-      console.log(res)
-console.log(res.data.response);
-     
-   //  this.setState({res.data});
-for(let error in res.data.response.errors){
-  console.log(res.data.response.errors[error])
-  let div = document.getElementById("resultat")
-  
-let p = document.createElement("p")
-div.append(res.data.response.errors[error].bad, p)
-}
-        //    let correction = Array.from(res.data.response.errors).map((error => [
-        //     {
-        //       bad: error.bad ,
-        //       good: error.good,
-        //       description: error.description
-             
-        //     } 
-        //   ]));
+      console.log(res);
+      console.log(res.data.response);
 
-        // //  this.setState({correction})
-        //  console.log(correction);
-        })
-   
-        //.catch((error) => console.log(error))
-    
-        //render(){
+      //  this.setState({res.data});
+      for (let error in res.data.response.errors) {
+        console.log(res.data.response.errors[error]);
+        let div = document.getElementById("resultat");
 
-        
+        let p = document.createElement("p");
+        div.append(res.data.response.errors[error].bad, p);
+      }
+    });
+  }
+
+  render() {
+    this.handleResult();
+
     return (
       <>
         <h1>Correcteur de Grammaire</h1>
@@ -79,17 +58,11 @@ div.append(res.data.response.errors[error].bad, p)
           <input
             type="submit"
             value="Corrigez-moi"
-            onClick={() => this.handleClick()}
+            onClick={() => this.handleClick() /* , this.handleResult() */}
           />
         </div>
-        <div id="resultat">
-          <p></p>
-        {/* {errors.map((error => (
-        <p>{error.bad}</p>
-      ))} */}
-          {/* <p id= ""> erreur: {correction.bad},correction potentielle: {correction.good},description : {correction.description}</p> */}
-        </div>
+        <div id="resultat"></div>
       </>
     );
-  };
+  }
 }
