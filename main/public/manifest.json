@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "Extension Test",
+  "name": "Correcteur de Grammaire",
   "version": "1.0.1",
-  "description": "Extension Test to see if manifest works",
+  "description": "Une extension qui permet de corriger la faute d'orthographe, la faute de grammaire de la langue française",
   "icons": {
     "16": "favicon-16x16.png",
     "48": "favicon-48x48.png",
